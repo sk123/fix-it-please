@@ -21,9 +21,7 @@ export default function Layout() {
       <header className="app-header">
         <div className="header-inner">
           <Wrench size={20} className="header-icon" />
-          <h1 className="header-title">
-            <span className="title-text">{t('appTitle', uiLang)}</span>
-          </h1>
+          <h1 className="header-title">Fix it Please <em className="header-bang">!!</em></h1>
         </div>
       </header>
 
@@ -74,26 +72,10 @@ export default function Layout() {
           color: white;
           margin: 0;
           letter-spacing: -0.02em;
-          text-shadow: 0 0 20px rgba(255,255,255,0.15);
         }
-        .title-text {
-          background: linear-gradient(
-            90deg,
-            rgba(255,255,255,1) 0%,
-            rgba(255,255,255,1) 40%,
-            rgba(200,220,255,0.8) 50%,
-            rgba(255,255,255,1) 60%,
-            rgba(255,255,255,1) 100%
-          );
-          background-size: 200% 100%;
-          -webkit-background-clip: text;
-          background-clip: text;
-          -webkit-text-fill-color: transparent;
-          animation: shimmer 4s ease-in-out infinite;
-        }
-        @keyframes shimmer {
-          0%, 100% { background-position: 100% 0; }
-          50% { background-position: -100% 0; }
+        .header-bang {
+          font-style: italic;
+          opacity: 0.85;
         }
         .bottom-nav {
           position: sticky;
