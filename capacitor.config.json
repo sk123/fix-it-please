@@ -1,0 +1,8 @@
+{
+    "appId": "com.fixitplease.app",
+    "appName": "Fix it Please",
+    "webDir": "dist",
+    "server": {
+        "androidScheme": "https"
+    }
+}
