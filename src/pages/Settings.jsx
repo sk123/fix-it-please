@@ -3,6 +3,7 @@ import { getSettings, saveSettings } from '../utils/storage';
 import { Check } from 'lucide-react';
 import { useLanguage } from '../utils/LanguageContext';
 import { t } from '../utils/i18n';
+import { getStateOptions, inferStateCodeFromAddress, normalizeStateCode } from '../utils/stateRepairRules';
 
 export default function Settings() {
     const [landlordName, setLandlordName] = useState('');
@@ -10,10 +11,15 @@ export default function Settings() {
     const [landlordEmail, setLandlordEmail] = useState('');
     const [tenantName, setTenantName] = useState('');
     const [tenantAddress, setTenantAddress] = useState('');
+    const [tenantState, setTenantState] = useState('');
     const [tenantPhone, setTenantPhone] = useState('');
     const [tenantEmail, setTenantEmail] = useState('');
+    const [leaseStartDate, setLeaseStartDate] = useState('');
+    const [leaseEndDate, setLeaseEndDate] = useState('');
+    const [monthlyRent, setMonthlyRent] = useState('');
     const [saved, setSaved] = useState(false);
     const { uiLang, messageLang, setUiLang, setMessageLang } = useLanguage();
+    const stateOptions = getStateOptions();
 
     useEffect(() => {
         const s = getSettings();
@@ -22,14 +28,19 @@ export default function Settings() {
         setLandlordEmail(s.landlordEmail || '');
         setTenantName(s.tenantName || '');
         setTenantAddress(s.tenantAddress || '');
+        setTenantState(normalizeStateCode(s.tenantState || inferStateCodeFromAddress(s.tenantAddress)));
         setTenantPhone(s.tenantPhone || '');
         setTenantEmail(s.tenantEmail || '');
+        setLeaseStartDate(s.leaseStartDate || '');
+        setLeaseEndDate(s.leaseEndDate || '');
+        setMonthlyRent(s.monthlyRent || '');
     }, []);
 
     const handleSave = () => {
         saveSettings({
             landlordName, landlordPhone, landlordEmail,
-            tenantName, tenantAddress, tenantPhone, tenantEmail,
+            tenantName, tenantAddress, tenantState, tenantPhone, tenantEmail,
+            leaseStartDate, leaseEndDate, monthlyRent,
         });
         setSaved(true);
         setTimeout(() => setSaved(false), 2000);
@@ -112,8 +123,30 @@ export default function Settings() {
                         className="input-field"
                         placeholder="e.g. 123 Main St, Apt 4B"
                         value={tenantAddress}
-                        onChange={e => setTenantAddress(e.target.value)}
+                        onChange={e => {
+                            const nextAddress = e.target.value;
+                            setTenantAddress(nextAddress);
+                            if (!tenantState) {
+                                setTenantState(normalizeStateCode(inferStateCodeFromAddress(nextAddress)));
+                            }
+                        }}
                     />
+                </div>
+                <div className="settings-field">
+                    <label className="input-label" htmlFor="t-state">{t('selectStateOptional', uiLang)}</label>
+                    <select
+                        id="t-state"
+                        className="input-field"
+                        value={tenantState}
+                        onChange={e => setTenantState(e.target.value)}
+                    >
+                        <option value="">{t('selectStateOptional', uiLang)}</option>
+                        {stateOptions.map(option => (
+                            <option key={option.code} value={option.code}>
+                                {option.name} ({option.code})
+                            </option>
+                        ))}
+                    </select>
                 </div>
                 <div className="settings-field">
                     <label className="input-label" htmlFor="t-phone">{t('yourPhoneLabel', uiLang)}</label>
@@ -173,6 +206,42 @@ export default function Settings() {
                         placeholder="e.g. landlord@email.com"
                         value={landlordEmail}
                         onChange={e => setLandlordEmail(e.target.value)}
+                    />
+                </div>
+            </div>
+
+            <h3 className="settings-section-title">{t('leaseSection', uiLang)}</h3>
+            <div className="glass-panel" style={{ padding: '1.25rem' }}>
+                <div className="settings-field">
+                    <label className="input-label" htmlFor="l-start">{t('leaseStartLabel', uiLang)}</label>
+                    <input
+                        id="l-start"
+                        className="input-field"
+                        type="date"
+                        value={leaseStartDate}
+                        onChange={e => setLeaseStartDate(e.target.value)}
+                    />
+                </div>
+                <div className="settings-field">
+                    <label className="input-label" htmlFor="l-end">{t('leaseEndLabel', uiLang)}</label>
+                    <input
+                        id="l-end"
+                        className="input-field"
+                        type="date"
+                        value={leaseEndDate}
+                        onChange={e => setLeaseEndDate(e.target.value)}
+                    />
+                </div>
+                <div className="settings-field">
+                    <label className="input-label" htmlFor="l-rent">{t('monthlyRentLabel', uiLang)}</label>
+                    <input
+                        id="l-rent"
+                        className="input-field"
+                        type="number"
+                        inputMode="decimal"
+                        placeholder="e.g. 1200"
+                        value={monthlyRent}
+                        onChange={e => setMonthlyRent(e.target.value)}
                     />
                 </div>
             </div>

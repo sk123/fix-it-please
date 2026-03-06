@@ -6,9 +6,9 @@ import { t } from '../utils/i18n';
 
 const CATEGORY_KEYS = [
   { id: 'lease', key: 'leaseContract', icon: '📄' },
-  { id: 'walkthrough', key: 'walkthroughPhotos', icon: '🏠' },
   { id: 'receipts', key: 'receipts', icon: '🧾' },
   { id: 'correspondence', key: 'lettersEmails', icon: '✉️' },
+  { id: 'images', key: 'imagesVideos', icon: '🖼️' },
   { id: 'other', key: 'other', icon: '📁' },
 ];
 
@@ -48,10 +48,10 @@ export default function DocumentVault() {
   };
 
   const categoryItems = activeCategory
-    ? items.filter(i => i.category === activeCategory)
+    ? items.filter(i => i.category === activeCategory || (activeCategory === 'images' && i.category === 'walkthrough'))
     : [];
 
-  const getCategoryCount = (catId) => items.filter(i => i.category === catId).length;
+  const getCategoryCount = (catId) => items.filter(i => i.category === catId || (catId === 'images' && i.category === 'walkthrough')).length;
 
   const formatSize = (bytes) => {
     if (bytes < 1024) return bytes + ' B';

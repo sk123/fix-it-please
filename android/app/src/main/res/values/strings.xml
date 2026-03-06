@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Fix it Please</string>
-    <string name="title_activity_main">Fix it Please</string>
+    <string name="app_name">fix it PLEASE</string>
+    <string name="title_activity_main">fix it PLEASE</string>
     <string name="package_name">com.fixitplease.app</string>
     <string name="custom_url_scheme">com.fixitplease.app</string>
 </resources>

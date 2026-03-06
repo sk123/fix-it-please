@@ -1,6 +1,6 @@
 {
-    "name": "Fix it Please",
-    "short_name": "Fix it Please",
+    "name": "fix it PLEASE",
+    "short_name": "fix it PLEASE",
     "description": "Report repairs to your landlord instantly.",
     "start_url": "/",
     "display": "standalone",

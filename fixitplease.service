@@ -1,15 +1,17 @@
 [Unit]
-Description=Fix it Please - Static Web App
+Description=fix it PLEASE - Static Web App
 After=network.target
 
 [Service]
 Type=simple
 User=sk
 WorkingDirectory=/home/sk/dev/tenant-toolbox-mobile
-ExecStart=/usr/bin/npx serve dist -l 5173 -s
+ExecStart=/home/sk/.nvm/versions/node/v22.22.0/bin/serve dist -l 5174 -s
 Restart=always
 RestartSec=5
 Environment=NODE_ENV=production
+StandardOutput=journal
+StandardError=journal
 
 [Install]
 WantedBy=multi-user.target
