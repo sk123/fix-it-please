@@ -120,7 +120,7 @@ export default function DocumentVault() {
 
       {categoryItems.length === 0 ? (
         <div className="glass-panel" style={{ padding: '2.5rem 1.5rem', textAlign: 'center', opacity: 0.7 }}>
-          <FolderOpen size={40} style={{ color: 'var(--color-text-light-muted)', marginBottom: '0.75rem' }} />
+          <FolderOpen size={40} style={{ color: 'var(--color-text-light-muted)', marginBottom: '0.75rem' }} aria-hidden="true" />
           <p style={{ color: 'var(--color-text-light-muted)', margin: 0 }}>{t('noFilesYet', uiLang)}</p>
         </div>
       ) : (
@@ -140,8 +140,8 @@ export default function DocumentVault() {
                 <span className="vault-file-name">{item.name}</span>
                 <span className="vault-file-meta">{formatSize(item.size)} · {formatDate(item.timestamp)}</span>
               </div>
-              <button className="icon-btn" onClick={() => handleDelete(item.id)}>
-                <Trash2 size={16} />
+              <button className="icon-btn" onClick={() => handleDelete(item.id)} aria-label="Delete file">
+                <Trash2 size={16} aria-hidden="true" />
               </button>
             </div>
           ))}

@@ -498,7 +498,7 @@ export default function RepairRequest() {
     <div className="animate-fade-in repair-flow">
       {/* Photo download toast (web only) */}
       {photoToast && (
-        <div className="photo-toast">
+        <div className="photo-toast" role="alert">
           <span style={{ fontSize: '2rem' }}>📎</span>
           <div>
             <strong>Photo saved to Downloads</strong>
@@ -508,7 +508,7 @@ export default function RepairRequest() {
       )}
 
       {/* Progress bar */}
-      <div className="progress-track">
+      <div className="progress-track" role="progressbar" aria-valuenow={step} aria-valuemin={1} aria-valuemax={4} aria-label="Step progress">
         <div className="progress-fill" style={{ width: `${(step / 4) * 100}%` }} />
       </div>
 
@@ -524,6 +524,7 @@ export default function RepairRequest() {
                 <button
                   key={loc.id}
                   className={`chip chip-wide ${isActive ? 'chip-active' : ''}`}
+                  aria-pressed={isActive}
                   onClick={() => {
                     setLocations(prev => {
                       if (prev.includes(loc.id)) {
@@ -561,6 +562,7 @@ export default function RepairRequest() {
                       <button
                         key={`${locId}-${type.id}`}
                         className={`chip ${isActive ? 'chip-active' : ''}`}
+                        aria-pressed={isActive}
                         onClick={() => {
                           setSelectedIssues(prev => {
                             const cur = prev[locId] || [];
@@ -598,6 +600,7 @@ export default function RepairRequest() {
                 key={level.id}
                 className={`urgency-chip ${urgency === level.id ? 'urgency-active' : ''}`}
                 onClick={() => setUrgency(level.id)}
+                aria-pressed={urgency === level.id}
                 style={{
                   '--urgency-color': level.color,
                 }}
@@ -630,6 +633,7 @@ export default function RepairRequest() {
                 <p className="step-subtitle" style={{ marginBottom: '0.5rem' }}>{t('describeIssue', uiLang)}</p>
                 <textarea
                   className="input-field description-textarea"
+                  aria-label="Issue description"
                   placeholder={(() => {
                     const firstLoc = locations.find(l => selectedIssues[l]?.length > 0);
                     const firstIssue = firstLoc && selectedIssues[firstLoc][0];
@@ -663,7 +667,7 @@ export default function RepairRequest() {
                 {photoPreviews.map((preview, index) => (
                   <div key={index} className="photo-preview-wrap" style={{ minWidth: '120px', position: 'relative' }}>
                     <img src={preview} alt="Preview" className="photo-preview-img" style={{ width: '120px', height: '120px', objectFit: 'cover', borderRadius: '8px' }} />
-                    <button onClick={() => removePhoto(index)} className="photo-remove-btn" style={{ position: 'absolute', top: '5px', right: '5px', background: 'rgba(0,0,0,0.6)', color: 'white', border: 'none', borderRadius: '50%', width: '24px', height: '24px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px' }}>
+                    <button onClick={() => removePhoto(index)} className="photo-remove-btn" aria-label="Remove photo" style={{ position: 'absolute', top: '5px', right: '5px', background: 'rgba(0,0,0,0.6)', color: 'white', border: 'none', borderRadius: '50%', width: '24px', height: '24px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px' }}>
                       ✕
                     </button>
                   </div>
@@ -730,6 +734,7 @@ export default function RepairRequest() {
               <input
                 className="input-field"
                 placeholder={t('yourName', uiLang)}
+                aria-label={t('yourName', uiLang)}
                 value={tenant.tenantName || ''}
                 onChange={e => setTenant(prev => ({ ...prev, tenantName: e.target.value }))}
                 style={{ marginBottom: '0.5rem' }}
@@ -737,6 +742,7 @@ export default function RepairRequest() {
               <input
                 className="input-field"
                 placeholder={t('yourAddress', uiLang)}
+                aria-label={t('yourAddress', uiLang)}
                 value={tenant.tenantAddress || ''}
                 onChange={e => {
                   const nextAddress = e.target.value;
@@ -751,6 +757,7 @@ export default function RepairRequest() {
                 className="input-field"
                 value={tenantState}
                 onChange={e => setTenantState(e.target.value)}
+                aria-label={t('selectStateOptional', uiLang)}
                 style={{ marginBottom: '0.5rem' }}
               >
                 <option value="">{t('selectStateOptional', uiLang)}</option>
@@ -764,6 +771,7 @@ export default function RepairRequest() {
                 className="input-field"
                 type="tel"
                 placeholder={t('yourPhoneOptional', uiLang)}
+                aria-label={t('yourPhoneOptional', uiLang)}
                 value={tenant.tenantPhone || ''}
                 onChange={e => setTenant(prev => ({ ...prev, tenantPhone: e.target.value }))}
                 style={{ marginBottom: '0.5rem' }}
@@ -772,6 +780,7 @@ export default function RepairRequest() {
                 className="input-field"
                 type="email"
                 placeholder={t('yourEmailOptional', uiLang)}
+                aria-label={t('yourEmailOptional', uiLang)}
                 value={tenant.tenantEmail || ''}
                 onChange={e => setTenant(prev => ({ ...prev, tenantEmail: e.target.value }))}
               />
@@ -807,6 +816,7 @@ export default function RepairRequest() {
               <input
                 className="input-field"
                 placeholder={t('landlordNamePlaceholder', uiLang)}
+                aria-label={t('landlordNamePlaceholder', uiLang)}
                 value={landlord.landlordName || ''}
                 onChange={e => setLandlord(prev => ({ ...prev, landlordName: e.target.value }))}
                 style={{ marginBottom: '0.5rem' }}
@@ -815,6 +825,7 @@ export default function RepairRequest() {
                 className="input-field"
                 type="tel"
                 placeholder={t('phonePlaceholder', uiLang)}
+                aria-label={t('phonePlaceholder', uiLang)}
                 value={landlord.landlordPhone || ''}
                 onChange={e => setLandlord(prev => ({ ...prev, landlordPhone: e.target.value }))}
                 style={{ marginBottom: '0.5rem' }}
@@ -823,6 +834,7 @@ export default function RepairRequest() {
                 className="input-field"
                 type="email"
                 placeholder={t('emailPlaceholder', uiLang)}
+                aria-label={t('emailPlaceholder', uiLang)}
                 value={landlord.landlordEmail || ''}
                 onChange={e => setLandlord(prev => ({ ...prev, landlordEmail: e.target.value }))}
               />
@@ -854,6 +866,7 @@ export default function RepairRequest() {
             <select
               value={messageLang}
               onChange={(e) => setMessageLang(e.target.value)}
+              aria-label="Message language"
               style={{
                 fontSize: '0.8rem',
                 color: 'var(--color-primary)',

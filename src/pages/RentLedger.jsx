@@ -164,7 +164,7 @@ export default function RentLedger() {
                 <div className="glass-panel payment-form animate-fade-in">
                     <div className="form-header">
                         <span className="form-title">💰 {t('logPayment', uiLang)}</span>
-                        <button className="form-close" onClick={() => setShowForm(false)}><X size={18} /></button>
+                        <button className="form-close" onClick={() => setShowForm(false)} aria-label="Close"><X size={18} aria-hidden="true" /></button>
                     </div>
 
                     <div className="form-field">
@@ -189,6 +189,7 @@ export default function RentLedger() {
                                     key={m.id}
                                     className={`method-chip ${method === m.id ? 'method-active' : ''}`}
                                     onClick={() => setMethod(m.id)}
+                                    aria-pressed={method === m.id}
                                 >
                                     {m.label}
                                 </button>
@@ -202,7 +203,7 @@ export default function RentLedger() {
                         {receiptPhoto ? (
                             <div className="receipt-preview">
                                 <img src={receiptPhoto} alt="Receipt" />
-                                <button className="receipt-remove" onClick={() => setReceiptPhoto(null)}><X size={14} /></button>
+                                <button className="receipt-remove" onClick={() => setReceiptPhoto(null)} aria-label="Remove receipt photo"><X size={14} aria-hidden="true" /></button>
                             </div>
                         ) : (
                             <div className="photo-btn-grid">
@@ -234,7 +235,7 @@ export default function RentLedger() {
             {/* Payment History */}
             {payments.length === 0 && !showForm && (
                 <div className="glass-panel" style={{ padding: '3rem 1.5rem', textAlign: 'center', opacity: 0.7 }}>
-                    <DollarSign size={40} style={{ color: 'var(--color-text-light-muted)', marginBottom: '0.75rem' }} />
+                    <DollarSign size={40} style={{ color: 'var(--color-text-light-muted)', marginBottom: '0.75rem' }} aria-hidden="true" />
                     <p style={{ color: 'var(--color-text-light-muted)', margin: 0 }}>{t('noPaymentsYet', uiLang)}</p>
                 </div>
             )}
@@ -256,8 +257,8 @@ export default function RentLedger() {
                                     <img src={p.receiptPhoto} alt="Receipt" />
                                 </div>
                             )}
-                            <button className="payment-delete" onClick={() => handleDelete(p.id)}>
-                                <Trash2 size={14} /> {t('remove', uiLang)}
+                            <button className="payment-delete" onClick={() => handleDelete(p.id)} aria-label="Delete payment">
+                                <Trash2 size={14} aria-hidden="true" /> {t('remove', uiLang)}
                             </button>
                         </div>
                     ))}

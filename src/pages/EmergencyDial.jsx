@@ -57,7 +57,7 @@ export default function EmergencyDial() {
                 {CONTACTS.map((c, i) => (
                     <a key={i} href={`tel:${c.phone}`} className="emergency-card" style={{ '--e-gradient': c.gradient }}>
                         <div className="e-icon">
-                            <Phone size={24} />
+                            <Phone size={24} aria-hidden="true" />
                         </div>
                         <div className="e-info">
                             <strong>{c.label}</strong>
@@ -75,7 +75,7 @@ export default function EmergencyDial() {
             )}
 
             <div className="emergency-disc">
-                <AlertTriangle size={14} />
+                <AlertTriangle size={14} aria-hidden="true" />
                 <span>{t('emergencyDisclaimer', uiLang)}</span>
             </div>
 

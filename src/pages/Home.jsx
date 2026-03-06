@@ -143,7 +143,7 @@ export default function Home() {
 
       {/* === Deadline Dashboard === */}
       {(deadlineAlerts || leaseAlerts) && (
-        <div className="dashboard-alerts">
+        <div className="dashboard-alerts" role="alert">
           {deadlineAlerts?.overdue > 0 && (
             <Link to="/records" className="alert-card alert-warning">
               <span className="alert-icon">⏰</span>
@@ -187,7 +187,7 @@ export default function Home() {
         {/* Primary tools */}
         <Link to="/repair" className="home-card glass-panel">
           <div className="home-card-icon" style={{ background: 'linear-gradient(135deg, rgba(59,130,246,0.15), rgba(139,92,246,0.1))' }}>
-            <Wrench size={32} color="var(--color-primary)" />
+            <Wrench size={32} color="var(--color-primary)" aria-hidden="true" />
           </div>
           <div className="home-card-text">
             <h3>{t('fixSomething', uiLang)}</h3>
@@ -197,7 +197,7 @@ export default function Home() {
 
         <Link to="/records" className="home-card glass-panel">
           <div className="home-card-icon" style={{ background: 'linear-gradient(135deg, rgba(245,158,11,0.15), rgba(217,119,6,0.1))' }}>
-            <Clock size={32} color="#f59e0b" />
+            <Clock size={32} color="#f59e0b" aria-hidden="true" />
           </div>
           <div className="home-card-text">
             <h3>{t('requestHistory', uiLang)}</h3>
@@ -207,7 +207,7 @@ export default function Home() {
 
         <Link to="/rent" className="home-card glass-panel">
           <div className="home-card-icon" style={{ background: 'linear-gradient(135deg, rgba(16,185,129,0.15), rgba(5,150,105,0.1))' }}>
-            <DollarSign size={32} color="var(--color-success)" />
+            <DollarSign size={32} color="var(--color-success)" aria-hidden="true" />
           </div>
           <div className="home-card-text">
             <h3>{t('rentTracker', uiLang)}</h3>
@@ -217,7 +217,7 @@ export default function Home() {
 
         <Link to="/vault" className="home-card glass-panel">
           <div className="home-card-icon" style={{ background: 'linear-gradient(135deg, rgba(99,102,241,0.15), rgba(79,70,229,0.1))' }}>
-            <FolderOpen size={32} color="#6366f1" />
+            <FolderOpen size={32} color="#6366f1" aria-hidden="true" />
           </div>
           <div className="home-card-text">
             <h3>{t('documentVault', uiLang)}</h3>
@@ -227,7 +227,7 @@ export default function Home() {
 
         <Link to="/condition" className="home-card glass-panel">
           <div className="home-card-icon" style={{ background: 'linear-gradient(135deg, rgba(236,72,153,0.15), rgba(219,39,119,0.1))' }}>
-            <Camera size={32} color="#ec4899" />
+            <Camera size={32} color="#ec4899" aria-hidden="true" />
           </div>
           <div className="home-card-text">
             <h3>{t('conditionReport', uiLang)}</h3>
@@ -237,7 +237,7 @@ export default function Home() {
 
         <Link to="/notes" className="home-card glass-panel">
           <div className="home-card-icon" style={{ background: 'linear-gradient(135deg, rgba(139,92,246,0.15), rgba(109,40,217,0.1))' }}>
-            <StickyNote size={32} color="var(--color-secondary)" />
+            <StickyNote size={32} color="var(--color-secondary)" aria-hidden="true" />
           </div>
           <div className="home-card-text">
             <h3>{t('recordNote', uiLang)}</h3>
@@ -250,7 +250,7 @@ export default function Home() {
 
         <Link to="/emergency" className="home-card glass-panel">
           <div className="home-card-icon" style={{ background: 'linear-gradient(135deg, rgba(239,68,68,0.15), rgba(220,38,38,0.1))' }}>
-            <Phone size={32} color="#ef4444" />
+            <Phone size={32} color="#ef4444" aria-hidden="true" />
           </div>
           <div className="home-card-text">
             <h3>{t('emergencyContacts', uiLang)}</h3>
@@ -260,7 +260,7 @@ export default function Home() {
 
         <Link to="/legal-aid" className="home-card glass-panel">
           <div className="home-card-icon" style={{ background: 'linear-gradient(135deg, rgba(14,165,233,0.15), rgba(2,132,199,0.1))' }}>
-            <LifeBuoy size={32} color="#0ea5e9" />
+            <LifeBuoy size={32} color="#0ea5e9" aria-hidden="true" />
           </div>
           <div className="home-card-text">
             <h3>{t('legalAidTitle', uiLang)}</h3>

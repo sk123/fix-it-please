@@ -166,8 +166,8 @@ export default function ConditionReport() {
                                     <p className="report-meta">
                                         {r.rooms?.length || 0} {t('rooms', uiLang)} · {r.totalPhotos || 0} {t('photos', uiLang)}
                                     </p>
-                                    <button className="payment-delete" onClick={() => handleDeleteReport(r.id)}>
-                                        <Trash2 size={14} /> {t('remove', uiLang)}
+                                    <button className="payment-delete" onClick={() => handleDeleteReport(r.id)} aria-label="Delete report">
+                                        <Trash2 size={14} aria-hidden="true" /> {t('remove', uiLang)}
                                     </button>
                                 </div>
                             ))}
@@ -188,10 +188,10 @@ export default function ConditionReport() {
                 <div className="animate-fade-in">
                     {/* Type selector */}
                     <div className="type-toggle">
-                        <button className={`type-btn ${reportType === 'move_in' ? 'type-active' : ''}`} onClick={() => setReportType('move_in')}>
+                        <button className={`type-btn ${reportType === 'move_in' ? 'type-active' : ''}`} onClick={() => setReportType('move_in')} aria-pressed={reportType === 'move_in'}>
                             📥 {t('moveIn', uiLang)}
                         </button>
-                        <button className={`type-btn ${reportType === 'move_out' ? 'type-active' : ''}`} onClick={() => setReportType('move_out')}>
+                        <button className={`type-btn ${reportType === 'move_out' ? 'type-active' : ''}`} onClick={() => setReportType('move_out')} aria-pressed={reportType === 'move_out'}>
                             📤 {t('moveOut', uiLang)}
                         </button>
                     </div>
@@ -202,7 +202,7 @@ export default function ConditionReport() {
                             const isDone = completedRooms.includes(room.id);
                             const photoCount = (roomPhotos[room.id] || []).length;
                             return (
-                                <button key={room.id} className={`room-btn glass-panel ${isDone ? 'room-done' : ''}`} onClick={() => setCurrentRoom(room.id)}>
+                                <button key={room.id} className={`room-btn glass-panel ${isDone ? 'room-done' : ''}`} onClick={() => setCurrentRoom(room.id)} aria-pressed={isDone}>
                                     <span className="room-icon">{room.icon}</span>
                                     <span className="room-label">{getRoomLabel(room.id)}</span>
                                     {isDone && <Check size={16} className="room-check" />}
@@ -256,6 +256,7 @@ export default function ConditionReport() {
                     <input
                         className="input-field"
                         placeholder={t('roomNotePlaceholder', uiLang)}
+                        aria-label={t('roomNotePlaceholder', uiLang)}
                         value={roomNotes[currentRoom] || ''}
                         onChange={e => setRoomNotes(prev => ({ ...prev, [currentRoom]: e.target.value }))}
                         style={{ marginBottom: '0.75rem' }}

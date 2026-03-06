@@ -93,14 +93,15 @@ export default function Notes() {
         <div className="glass-panel composer animate-fade-in">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
             <span style={{ fontWeight: 700 }}>{t('newNote', uiLang)}</span>
-            <button className="icon-btn" onClick={() => { setShowComposer(false); setText(''); stopRecording(); }}>
-              <X size={20} />
+            <button className="icon-btn" onClick={() => { setShowComposer(false); setText(''); stopRecording(); }} aria-label="Close">
+              <X size={20} aria-hidden="true" />
             </button>
           </div>
 
           <textarea
             className="input-field note-textarea"
             placeholder={t('typeOrSpeak', uiLang)}
+            aria-label={t('typeOrSpeak', uiLang)}
             value={text}
             onChange={e => setText(e.target.value)}
             rows={5}
@@ -110,6 +111,7 @@ export default function Notes() {
             <button
               className={`mic-btn ${isRecording ? 'mic-recording' : ''}`}
               onClick={isRecording ? stopRecording : startRecording}
+              aria-pressed={isRecording}
             >
               {isRecording ? <MicOff size={22} /> : <Mic size={22} />}
               {isRecording ? t('stop', uiLang) : t('speak', uiLang)}
@@ -139,8 +141,8 @@ export default function Notes() {
             <p className="note-text">{note.text}</p>
             <div className="note-footer">
               <span className="note-date">{formatDate(note.timestamp)}</span>
-              <button className="icon-btn delete-btn" onClick={() => handleDelete(note.id)}>
-                <Trash2 size={16} />
+              <button className="icon-btn delete-btn" onClick={() => handleDelete(note.id)} aria-label="Delete note">
+                <Trash2 size={16} aria-hidden="true" />
               </button>
             </div>
           </div>

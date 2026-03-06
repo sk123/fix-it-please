@@ -69,12 +69,14 @@ export default function Settings() {
                         <button
                             className={`lang-btn ${uiLang === 'en' ? 'lang-active' : ''}`}
                             onClick={() => handleUiLangChange('en')}
+                            aria-pressed={uiLang === 'en'}
                         >
                             {t('langEnglish', uiLang)}
                         </button>
                         <button
                             className={`lang-btn ${uiLang === 'es' ? 'lang-active' : ''}`}
                             onClick={() => handleUiLangChange('es')}
+                            aria-pressed={uiLang === 'es'}
                         >
                             {t('langSpanish', uiLang)}
                         </button>
@@ -90,12 +92,14 @@ export default function Settings() {
                             <button
                                 className={`lang-btn ${messageLang === 'en' ? 'lang-active' : ''}`}
                                 onClick={() => setMessageLang('en')}
+                                aria-pressed={messageLang === 'en'}
                             >
                                 English
                             </button>
                             <button
                                 className={`lang-btn ${messageLang === 'es' ? 'lang-active' : ''}`}
                                 onClick={() => setMessageLang('es')}
+                                aria-pressed={messageLang === 'es'}
                             >
                                 Español
                             </button>

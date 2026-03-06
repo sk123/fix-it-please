@@ -186,7 +186,7 @@ export default function RepairRecords() {
               flexShrink: 0,
             }}
           >
-            <FolderDown size={16} />
+            <FolderDown size={16} aria-hidden="true" />
             {t('exportFullHistory', uiLang)}
           </button>
         )}
@@ -194,7 +194,7 @@ export default function RepairRecords() {
 
       {records.length === 0 ? (
         <div className="glass-panel" style={{ padding: '3rem 1.5rem', textAlign: 'center', opacity: 0.7 }}>
-          <Calendar size={40} style={{ color: 'var(--color-text-light-muted)', marginBottom: '0.75rem' }} />
+          <Calendar size={40} style={{ color: 'var(--color-text-light-muted)', marginBottom: '0.75rem' }} aria-hidden="true" />
           <p style={{ color: 'var(--color-text-light-muted)', margin: 0 }}>
             {t('noRequestsYet', uiLang)}
           </p>
@@ -240,6 +240,7 @@ export default function RepairRecords() {
                       className={`status-chip ${currentStatus === opt.id ? 'status-active' : ''}`}
                       style={{ '--status-color': opt.color }}
                       onClick={() => handleStatusChange(record.id, opt.id)}
+                      aria-pressed={currentStatus === opt.id}
                     >
                       {t(opt.key, uiLang)}
                     </button>
@@ -252,7 +253,7 @@ export default function RepairRecords() {
                     className="log-response-btn"
                     onClick={() => startLogging(record.id)}
                   >
-                    <MessageSquarePlus size={20} />
+                    <MessageSquarePlus size={20} aria-hidden="true" />
                     <span>{t('logResponse', uiLang)}</span>
                   </button>
                 )}
@@ -262,8 +263,8 @@ export default function RepairRecords() {
                   <div className="log-form animate-fade-in">
                     <div className="log-form-header">
                       <span className="log-form-title">📸 {t('logResponse', uiLang)}</span>
-                      <button className="log-close-btn" onClick={cancelLogging}>
-                        <X size={18} />
+                      <button className="log-close-btn" onClick={cancelLogging} aria-label="Close">
+                        <X size={18} aria-hidden="true" />
                       </button>
                     </div>
 
@@ -274,8 +275,9 @@ export default function RepairRecords() {
                         <button
                           className="log-photo-remove"
                           onClick={() => setLogPhoto(null)}
+                          aria-label="Remove photo"
                         >
-                          <X size={14} />
+                          <X size={14} aria-hidden="true" />
                         </button>
                       </div>
                     ) : (
@@ -296,12 +298,14 @@ export default function RepairRecords() {
                       <button
                         className={`log-dir-btn ${logDirection === 'received' ? 'log-dir-active' : ''}`}
                         onClick={() => setLogDirection('received')}
+                        aria-pressed={logDirection === 'received'}
                       >
                         ← {t('directionReceived', uiLang)}
                       </button>
                       <button
                         className={`log-dir-btn ${logDirection === 'sent' ? 'log-dir-active' : ''}`}
                         onClick={() => setLogDirection('sent')}
+                        aria-pressed={logDirection === 'sent'}
                       >
                         {t('directionSent', uiLang)} →
                       </button>
@@ -314,6 +318,7 @@ export default function RepairRecords() {
                           key={m.id}
                           className={`log-method-btn ${logMethod === m.id ? 'log-method-active' : ''}`}
                           onClick={() => setLogMethod(m.id)}
+                          aria-pressed={logMethod === m.id}
                         >
                           {t(m.key, uiLang)}
                         </button>
@@ -332,6 +337,7 @@ export default function RepairRecords() {
                       <textarea
                         className="input-field log-note-textarea"
                         placeholder={t('notePlaceholder', uiLang)}
+                        aria-label={t('optionalNote', uiLang)}
                         value={logNote}
                         onChange={e => setLogNote(e.target.value)}
                         rows={2}

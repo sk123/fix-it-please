@@ -264,8 +264,8 @@ export default function LegalAidFinder() {
             {/* State search */}
             <div className="la-search glass-panel">
                 <div className="la-search-row">
-                    <MapPin size={18} color="var(--color-primary)" />
-                    <select className="input-field" style={{ flex: 1, appearance: 'auto' }} value={state} onChange={e => { setState(e.target.value); setSearched(!!e.target.value) }}>
+                    <MapPin size={18} color="var(--color-primary)" aria-hidden="true" />
+                    <select className="input-field" style={{ flex: 1, appearance: 'auto' }} value={state} onChange={e => { setState(e.target.value); setSearched(!!e.target.value) }} aria-label={t('selectYourState', uiLang)}>
                         <option value="">{t('selectYourState', uiLang)}</option>
                         {Object.keys(STATE_LEGAL_AID).map(s => <option key={s} value={s}>{s}</option>)}
                     </select>
@@ -328,7 +328,7 @@ export default function LegalAidFinder() {
             </div>
 
             <div className="la-disc">
-                <AlertTriangle size={14} />
+                <AlertTriangle size={14} aria-hidden="true" />
                 <span>{t('legalAidEmergencyWarning', uiLang)}</span>
             </div>
 

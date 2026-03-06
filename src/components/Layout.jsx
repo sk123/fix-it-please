@@ -18,10 +18,11 @@ export default function Layout() {
 
   return (
     <div className="app-container">
+      <a href="#main-content" className="skip-link">Skip to main content</a>
       <header className="app-header">
         <div className="header-inner">
           <div className="header-brand">
-            <Wrench size={22} className="header-icon" />
+            <Wrench size={22} className="header-icon" aria-hidden="true" />
             <div className="header-text">
               <h1 className="header-title">
                 <span className="title-fix">fix it </span>
@@ -31,22 +32,22 @@ export default function Layout() {
             </div>
           </div>
           <div className="header-actions">
-            <Link to="/emergency" className={`header-action-btn ${location.pathname === '/emergency' ? 'header-action-active' : ''}`} title={t('emergencyContacts', uiLang)}>
-              <Phone size={18} />
+            <Link to="/emergency" className={`header-action-btn ${location.pathname === '/emergency' ? 'header-action-active' : ''}`} aria-label={t('emergencyContacts', uiLang)}>
+              <Phone size={18} aria-hidden="true" />
             </Link>
-            <Link to="/legal-aid" className={`header-action-btn header-action-aid ${location.pathname === '/legal-aid' ? 'header-action-active' : ''}`} title={t('legalAidTitle', uiLang)}>
-              <LifeBuoy size={18} />
+            <Link to="/legal-aid" className={`header-action-btn header-action-aid ${location.pathname === '/legal-aid' ? 'header-action-active' : ''}`} aria-label={t('legalAidTitle', uiLang)}>
+              <LifeBuoy size={18} aria-hidden="true" />
             </Link>
           </div>
         </div>
       </header>
 
-      <main className="main-content">
+      <main id="main-content" className="main-content">
         <Outlet />
       </main>
 
       {/* Mobile Bottom Navigation */}
-      <nav className="bottom-nav">
+      <nav className="bottom-nav" aria-label="Main navigation">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = location.pathname === item.path ||
@@ -56,8 +57,9 @@ export default function Layout() {
               key={item.path}
               to={item.path}
               className={`nav-item ${isActive ? 'active' : ''}`}
+              aria-current={isActive ? 'page' : undefined}
             >
-              <Icon size={20} />
+              <Icon size={20} aria-hidden="true" />
               <span>{item.label}</span>
             </Link>
           );
